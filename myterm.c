@@ -277,6 +277,7 @@ static void output_char(int c) {
     } else if (xpos < 0) xpos = 0;
 
     if (ypos < 0) {                 // XXX missing scroll down
+        fprintf(stderr, "unhandled scroll down\n");
         ypos = 0;
     } else if (ypos >= THEIGHT) {   // scroll up
         SDL_Rect sr = {0, CHEIGHT, WIDTH, CHEIGHT };
