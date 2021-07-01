@@ -4,7 +4,7 @@
 # CFLAGS="-march=mips32 -mno-mips16" CC=mipsel-linux-gcc ./build.sh
 
 # local compile
-# CFLAGS='-DMYTERM_DATA="./data/"' ./build.sh
+CFLAGS='-DMYTERM_DATA="./data/"'
 
 test -z "$CC" && CC=gcc
 
