@@ -1,0 +1,107 @@
+
+Control Sequence Introducer (CSI)
+    ESC [
+    
+Parameter
+    Zero or more decimal characters chich represent a single value
+
+Numeric Parameter
+    A parameter that represents a number, designated by Pn.
+
+Selective Parameter
+    A parameter that selects a subfunction from a specified list of
+    subfunctions, designated by Ps.
+    
+Parameter String
+    A string of parameters separated by a semicolon (';').
+
+Default
+    A function-dependent value that is assumed when no explicit value,
+    or a value of 0, is specified.
+
+Final character
+    A character whose bit combination terminates an escape or control sequence. 
+
+
+
+Requests        (host to vt100)
+========
+
+ESC [ Pn A              CUU - Cursor Up
+ESC [ Pn B              CUD - Cursor Down
+ESC [ Pn C              CUF - Cursor Forward (Right)
+ESC [ Pn D              CUB - Cursor Backward (Left)
+
+ESC [ Pn ; Pn H         CUP - Cursor Position to Line;Column
+
+ESC [ Pn c              DA - Device Attributes request. Ommit Pn or set to 0
+                                Reply with DA (see below)
+
+ESC [ 5 n               DSR – Device Status Report, request status
+                                Reply with DSR (see below)
+ESC [ 6 n               DSR – Device Status Report, request cursor position
+                                Reply with CPR (see below)
+
+ESC [ Ps J              ED - Erase In Display
+                                0   Erase until end of screen
+                                1   Erase until start of screen
+                                2   Both of the above (i.e. clear screen)
+
+ESC [ Ps K              EL - Erase In Line
+                                0   Erase until end of line
+                                1   Erase until beginning of line
+                                2   clear line
+
+ESC [ Pn ; Pn f         HVP Horizontal and Vertical Position, see CUP
+
+ESC D                   IND - Index, ypos++, xpos unaltered
+ESC E                   NEL - Next Line, ypos++, xpos=0
+ESC M                   RI - Reverse Index, ypos--, xpos unaltered
+
+ESC c                   RIS - Reset To Initial State, reset terminal
+
+                        SCS - Select Character Set
+
+G0 Sequence     G1 Sequence    Meaning
+-----------     -----------    -------
+ESC ( A         ESC ) A        United Kingdom Set
+ESC ( B         ESC ) B        ASCII Set
+ESC ( 0         ESC ) 0        Special Graphics
+ESC ( 1         ESC ) 1        Alternate Character ROM Standard Character Set
+ESC ( 2         ESC ) 2        Alternate Character ROM Special Graphics
+
+ESC [ Ps ; ... ; Ps m   SGR - Set Graphics Rendition
+                                    0   Attributes off
+                                    1   Bold or increased intensity
+                                    4   Underscore
+                                    5   Blink
+                                    7   Reverse Video
+
+ESC [ Ps ; ... ; Ps l   RM - Reset Mode
+ESC [ Ps ; ... ; Ps h   SM - Set Mode
+                            (might need mode 2, switch between ANSI and VT52)
+                            (1 cursor key mode?)
+                            (7 wraparound?)
+
+Tabulation requests and DEC Private controls not included.
+Do we need them?
+
+alsamixer/ncurses uses ESC [ Pn ; Pn r to set top and bottom margins
+
+
+
+Replies         (vt100 to host)
+=======
+
+ESC [ Pn; Pn R          CPR - Cursor Position Report Line;Column
+
+ESC [ Pn A              CUU - Cursor Up
+ESC [ Pn B              CUD - Cursor Down
+ESC [ Pn C              CUF - Cursor Forward (Right)
+ESC [ Pn D              CUB - Cursor Backward (Left)
+
+ESC [?1;nc              DA - Device Attribute reply. n is bitwise OR of:
+                                Processor Option        STP     1
+                                Advanced Video Option   AVO     2
+                                Graphics Option         GPO     4
+
