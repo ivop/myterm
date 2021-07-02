@@ -17,7 +17,41 @@
 
 /* Information on vt100: Digital VT100 User Guide http://www.vt100.net/ */
 
-#include "myterm.h"
+#define _XOPEN_SOURCE 600
+
+#include <stdio.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+#include "SDL/SDL.h"
+#include "SDL/SDL_image.h"
+
+#define stringify(s) do_stringify(s)
+#define do_stringify(s) #s
+
+#ifndef MYTERM_DATA
+#define MYTERM_DATA "/usr/share/myterm/"
+#endif
+
+#define CWIDTH  6
+#define WIDTH   320
+#define TWIDTH  53
+
+#define HEIGHT  240
+#define CHEIGHT 10
+#define THEIGHT 24
+
+#define FONTFILE "font6x10.png"
+#define BOLDFILE "bold6x10.png"
+#define BGFILE   "background.png"
+
+#define BPP    24
 
 #define OUTPUT(str,len)  write(fd_parent, str, len)
 
