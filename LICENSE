@@ -1,13 +1,4 @@
-# myterm
-Simple vt100 terminal based on SDL
-
-Rescued from https://sourceforge.net/projects/mydingux/
-
-It is not a full implementation of vt100 yet, but works pretty well, depending on the TERM setting. At least I wanted to unbury it from my old obsolete project :)
-
-BSD0 License:
-
-Copyright (C) 2013,2021 by Ivo van Poorten
+Copyright (C) 2013,2021 by Ivo van Poorten <ivopvp@gmail.com>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted.
