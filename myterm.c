@@ -271,7 +271,7 @@ static void output_char(int c) {
         if (!(xpos == TWIDTH-1 && wrap)) xpos++;
     }
 
-    if (xpos >= TWIDTH) {
+    if (xpos > TWIDTH) {
         xpos = 0;
         if (!wrap) ypos++;
     } else if (xpos < 0) xpos = 0;
