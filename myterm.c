@@ -275,8 +275,8 @@ static void output_char(int c) {
 
         while (sr.y < CHEIGHT*THEIGHT) {
             SDL_BlitSurface(screen, &sr, screen, &dr);
-            sr.y+=CHEIGHT;
-            dr.y+=CHEIGHT;
+            sr.y += CHEIGHT;
+            dr.y += CHEIGHT;
         }
 
         SDL_FillRect(screen, &dr, 0);
